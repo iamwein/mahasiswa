@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>List Mahasiswa</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="./style/style.css" />
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h2>Data Mahasiswa</h2>
+      <button
+        class="btn btn-primary mb-3 float-right"
+        onclick="tambahMahasiswa()"
+      >
+        Tambah Data Mahasiswa
+      </button>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>NIM</th>
+            <th>Nama</th>
+            <th>Jurusan</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody id="data-mahasiswa"></tbody>
+      </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      function getMahasiswaFromAPI() {
+        const apiUrl = "http://127.0.0.1:8088/user";
+
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", apiUrl, true);
+        xhr.onload = function () {
+          if (xhr.status === 200) {
+            const data = JSON.parse(xhr.responseText);
+            displayMahasiswa(data.data);
+          } else {
+            console.error("Gagal mengambil data mahasiswa dari API.");
+          }
+        };
+        xhr.send();
+      }
+
+      function displayMahasiswa(data) {
+        const tableBody = document.getElementById("data-mahasiswa");
+        tableBody.innerHTML = "";
+        data.forEach(function (mahasiswa) {
+          tableBody.innerHTML +=
+            "<tr>" +
+            "<td>" +
+            mahasiswa.id +
+            "</td>" +
+            "<td>" +
+            mahasiswa.nama +
+            "</td>" +
+            "<td>" +
+            mahasiswa.email +
+            "</td>" +
+            "<td>" +
+            '<button class="btn btn-primary" onclick="editMahasiswa(' +
+            mahasiswa.id +
+            ')">Edit</button> ' +
+            '<button class="btn btn-danger" onclick="deleteMahasiswa(' +
+            mahasiswa.id +
+            ')">Delete</button>' +
+            "</td>" +
+            "</tr>";
+        });
+      }
+
+      function editMahasiswa(mahasiswaId) {
+        window.location.href = "edit.html?nim=" + mahasiswaId;
+      }
+
+      function deleteMahasiswa(mahasiswaId) {
+        if (confirm("Hapus Mahasiswa dengan ID: " + mahasiswaId + "?")) {
+          // --
+        }
+        location.reload();
+      }
+
+      function tambahMahasiswa() {
+        window.location.href = "nilai-mahasiswa.html";
+      }
+
+      window.onload = function () {
+        getMahasiswaFromAPI();
+      };
+    </script>
+  </body>
+</html>
