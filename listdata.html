@@ -24,7 +24,10 @@
           <tr>
             <th>NIM</th>
             <th>Nama</th>
-            <th>Jurusan</th>
+            <th>Program Studi</th>
+            <th>IPK</th>
+            <th>Tempat Lahir</th>
+            <th>Tanggal Lahir</th>
             <th>Aksi</th>
           </tr>
         </thead>
@@ -36,14 +39,14 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
       function getMahasiswaFromAPI() {
-        const apiUrl = "http://127.0.0.1:8088/user";
+        const apiUrl = "http://127.0.0.1:8080/spring/bnspsert/v1/mahasiswa";
 
         const xhr = new XMLHttpRequest();
         xhr.open("GET", apiUrl, true);
         xhr.onload = function () {
           if (xhr.status === 200) {
             const data = JSON.parse(xhr.responseText);
-            displayMahasiswa(data.data);
+            displayMahasiswa(data);
           } else {
             console.error("Gagal mengambil data mahasiswa dari API.");
           }
@@ -58,20 +61,29 @@
           tableBody.innerHTML +=
             "<tr>" +
             "<td>" +
-            mahasiswa.id +
+            mahasiswa.nim +
             "</td>" +
             "<td>" +
             mahasiswa.nama +
             "</td>" +
             "<td>" +
-            mahasiswa.email +
+            mahasiswa.program_studi +
+            "</td>" +
+            "<td>" +
+            mahasiswa.ipk +
+            "</td>" +
+            "<td>" +
+            mahasiswa.tempat_lahir +
+            "</td>" +
+            "<td>" +
+            mahasiswa.tanggal_lahir +
             "</td>" +
             "<td>" +
             '<button class="btn btn-primary" onclick="editMahasiswa(' +
-            mahasiswa.id +
+            mahasiswa.nim +
             ')">Edit</button> ' +
             '<button class="btn btn-danger" onclick="deleteMahasiswa(' +
-            mahasiswa.id +
+            mahasiswa.nim +
             ')">Delete</button>' +
             "</td>" +
             "</tr>";
@@ -90,7 +102,7 @@
       }
 
       function tambahMahasiswa() {
-        window.location.href = "nilai-mahasiswa.html";
+        window.location.href = "tambah.html";
       }
 
       window.onload = function () {
