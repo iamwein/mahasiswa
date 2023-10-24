@@ -100,19 +100,28 @@
             ipk: $("#ipk").val(),
           };
 
-          $.ajax({
-            url: "http://127.0.0.1:8080/spring/bnspsert/v1/mahasiswa",
-            method: "POST",
-            data: JSON.stringify(data),
-            contentType: "application/json",
-            success: function (response) {
-              alert("Tambah Data Mahasiswa Berhasil!");
-              window.location.href = "listdata.html";
-            },
-            error: function (error) {
-              console.error("Gagal menambah data mahasiswa");
-            },
-          });
+          if (
+            data.nim == null ||
+            data.nim == "" ||
+            data.tanggal_lahir == null ||
+            data.tanggal_lahir == ""
+          ) {
+            alert("semua data wajib diisi!");
+          } else {
+            $.ajax({
+              url: "http://127.0.0.1:8080/spring/bnspsert/v1/mahasiswa",
+              method: "POST",
+              data: JSON.stringify(data),
+              contentType: "application/json",
+              success: function (response) {
+                alert("Tambah Data Mahasiswa Berhasil!");
+                window.location.href = "listdata.html";
+              },
+              error: function (error) {
+                console.error("Gagal menambah data mahasiswa");
+              },
+            });
+          }
         });
       });
     </script>
