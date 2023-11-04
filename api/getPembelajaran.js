@@ -17,44 +17,44 @@ function getMahasiswaFromAPI() {
 function displayMahasiswa(data) {
   const tableBody = document.getElementById("data-mahasiswa");
   tableBody.innerHTML = "";
-  data.forEach(function (mahasiswa) {
+  data.forEach(function (dosen) {
     tableBody.innerHTML +=
       "<tr>" +
       "<td>" +
-      mahasiswa.nim +
+      dosen.nim +
       "</td>" +
       "<td>" +
-      mahasiswa.nama +
+      dosen.nama +
       "</td>" +
       "<td>" +
-      mahasiswa.program_studi +
+      dosen.program_studi +
       "</td>" +
       "<td>" +
-      mahasiswa.ipk +
+      dosen.ipk +
       "</td>" +
       "<td>" +
-      mahasiswa.tempat_lahir +
+      dosen.tempat_lahir +
       "</td>" +
       "<td>" +
-      mahasiswa.tanggal_lahir +
+      dosen.tanggal_lahir +
       "</td>" +
       "<td>" +
-      '<button class="btn btn-primary" onclick="editMahasiswa(' +
-      mahasiswa.nim +
+      '<button class="btn btn-primary" onclick="editDosen(' +
+      dosen.nim +
       ')">Edit</button> ' +
-      '<button class="btn btn-danger" onclick="deleteMahasiswa(' +
-      mahasiswa.nim +
+      '<button class="btn btn-danger" onclick="deleteDosen(' +
+      dosen.nim +
       ')">Delete</button>' +
       "</td>" +
       "</tr>";
   });
 }
 
-function editMahasiswa(mahasiswaId) {
+function editDosen(mahasiswaId) {
   window.location.href = "edit.html?nim=" + mahasiswaId;
 }
 
-function deleteMahasiswa(mahasiswaId) {
+function deleteDosen(mahasiswaId) {
   if (confirm("Hapus Mahasiswa dengan ID: " + mahasiswaId + "?")) {
     // --
   }
