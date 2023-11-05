@@ -1,5 +1,5 @@
 function getDataDosen() {
-    const apiUrl = "http://127.0.0.1:8880/api/v1/dosen";
+    const apiUrl = "http://127.0.0.1:8880/api/v1/matakuliah";
 
     const xhr = new XMLHttpRequest();
     xhr.open("GET", apiUrl, true);
@@ -44,13 +44,13 @@ function tampilDosen(data) {
   });
 }
 
-function editMatkul(matkulId) {
-  window.location.href = "matakuliahedit.html?id=" + matkulId;
+function editMatkul(kodematkul) {
+  window.location.href = "matakuliahedit.html?kodematkul=" + kodematkul;
 }
 
-function deleteMatkul(matkulId) {
-  if (confirm("Hapus mata kuliah dengan ID: " + matkulId + "?")) {
-    const apiUrl = "http://127.0.0.1:8880/api/v1/dosen/hapus/" + matkulId;
+function deleteMatkul(kodematkul) {
+  if (confirm("Hapus mata kuliah dengan ID: " + kodematkul + "?")) {
+    const apiUrl = "http://127.0.0.1:8880/api/v1/matakuliah/hapus/" + kodematkul;
 
     const xhr = new XMLHttpRequest();
     xhr.open("DELETE", apiUrl, true);

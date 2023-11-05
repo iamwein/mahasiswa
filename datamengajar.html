@@ -8,7 +8,7 @@
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     />
     <link rel="stylesheet" href="./style/style.css" />
-    <script src="./api/getDataList.js"></script>
+    <script src="./api/getPembelajaran.js"></script>
     <title>pembelajaran</title>
   </head>
   <body>
@@ -45,32 +45,36 @@
               <a class="nav-link" href="./matakuliah.html">Mata Kuliah</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="./pembelajaran.html">Data Mengajar</a>
+              <a class="nav-link" href="./datamengajar.html">Data Mengajar</a>
             </li>
           </ul>
           <div class="ml-auto" href="./index.html">Logout</div>
         </div>
       </div>
     </nav>
-    <div>
-      <h1 class="text-center">Fullstack App Data Dosen</h1>
-      <h4 class="text-center">BNSP SWADHARMA</h4>
-    </div>
     <div class="container mt-5">
-      <div>
-        <h3>Data Pembelajaran</h3>
+      <div class="row align-items-start">
+        <div class="col">
+          <h5>Data Pembelajaran</h5>
+        </div>
+        <div class="col d-flex justify-content-end">
+          <button class="btn btn-warning" onclick="tambahNgajar()">
+            Tambah Pembelajaran
+          </button>
+        </div>
       </div>
       <table class="table">
         <thead>
           <tr>
             <th>NIDN</th>
             <th>Nama Dosen</th>
+            <th>ID Mata Kuliah</th>
             <th>Mata Kuliah</th>
             <th>SKS</th>
             <th>Aksi</th>
           </tr>
         </thead>
-        <tbody id="data-mahasiswa"></tbody>
+        <tbody id="data-ngajar"></tbody>
       </table>
     </div>
 

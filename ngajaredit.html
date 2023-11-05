@@ -53,36 +53,32 @@
       </div>
     </nav>
     <div class="container mt-4">
-      <h2 class="text-center mb-4">Edit Dosen</h2>
+      <h2 class="text-center mb-4">Edit Pembelajaran</h2>
       <form id="edit-form">
         <div class="form-group row">
-          <label for="nidn" class="col-sm-2 col-form-label">NIDN</label>
+          <label for="nidn_dosen" class="col-sm-2 col-form-label">
+            NIDN Dosen
+          </label>
           <div class="col-sm-10">
             <input
               type="text"
               class="form-control"
-              id="nidn"
-              name="nidn"
-              disabled
+              id="nidn_dosen"
+              name="nidn_dosen"
             />
           </div>
         </div>
         <div class="form-group row">
-          <label for="nama" class="col-sm-2 col-form-label">Nama</label>
+          <label for="kodematkul" class="col-sm-2 col-form-label">
+            Kode Mata Kuliah
+          </label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="nama" name="nama" />
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="jk" class="col-sm-2 col-form-label">Jenis Kelamin</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="jk" name="jk" />
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="alamat" name="alamat" />
+            <input
+              type="text"
+              class="form-control"
+              id="kodematkul"
+              name="kodematkul"
+            />
           </div>
         </div>
         <button type="submit" class="btn btn-primary text-center mt-4">
@@ -96,18 +92,14 @@
       const urlParams = new URLSearchParams(window.location.search);
       const id = urlParams.get("id");
       const editForm = document.getElementById("edit-form");
-      const nidnInput = document.getElementById("nidn");
-      const namaInput = document.getElementById("nama");
-      const jkInput = document.getElementById("jk");
-      const alamatInput = document.getElementById("alamat");
+      const nidnInput = document.getElementById("nidn_dosen");
+      const matkulInput = document.getElementById("kodematkul");
 
       function getDosenById(id) {
-        const apiUrl = "http://127.0.0.1:8880/api/v1/dosen/id/" + id;
+        const apiUrl = "http://127.0.0.1:8880/api/v1/ngajar/id/" + id;
         $.get(apiUrl, function (res) {
-          nidnInput.value = res.data.nidn;
-          namaInput.value = res.data.nama;
-          jkInput.value = res.data.jk;
-          alamatInput.value = res.data.alamat;
+          nidnInput.value = res.data.nidn_dosen;
+          matkulInput.value = res.data.kodematkul;
         });
       }
       getDosenById(id);
@@ -115,20 +107,18 @@
       editForm.addEventListener("submit", function (e) {
         e.preventDefault();
         const editedData = {
-          nama: namaInput.value,
-          jk: jkInput.value,
-          nidn: nidnInput.value,
-          alamat: alamatInput.value,
+          nidn_dosen: nidnInput.value,
+          kodematkul: matkulInput.value,
         };
 
         $.ajax({
-          url: "http://127.0.0.1:8880/api/v1/dosen/edit/" + id,
+          url: "http://127.0.0.1:8880/api/v1/ngajar/edit/" + id,
           method: "PUT",
           data: JSON.stringify(editedData),
           contentType: "application/json",
           success: function (response) {
             alert("Data berhasil diperbarui!");
-            window.location.href = "dosen.html";
+            window.location.href = "datamengajar.html";
           },
           error: function (error) {
             console.error("Gagal memperbarui data dosen!");

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tambah Dosen</title>
+    <title>Tambah Pembelajaran</title>
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -55,7 +55,7 @@
     <div class="container mt-5">
       <div class="row align-items-start">
         <div class="col mb-1">
-          <h5>Tambah Data Dosen</h5>
+          <h5>Tambah Data Pembelajaran</h5>
         </div>
       </div>
       <form id="tambah-dosen-form">
@@ -66,21 +66,9 @@
           </div>
         </div>
         <div class="form-group row">
-          <label for="nama" class="col-sm-2 col-form-label">Nama</label>
+          <label for="nama" class="col-sm-2 col-form-label">Kode Matkul</label>
           <div class="col-sm-10">
             <input type="text" class="form-control" id="nama" name="nama" />
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="jk" class="col-sm-2 col-form-label">Jenis Kelamin</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="jk" name="jk" />
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="alamat" name="alamat" />
           </div>
         </div>
         <div class="text-center">
@@ -98,28 +86,26 @@
         $("#tambah-dosen-form").submit(function (event) {
           event.preventDefault();
           const data = {
-            nidn: $("#nidn").val(),
-            nama: $("#nama").val(),
-            jk: $("#jk").val(),
-            alamat: $("#alamat").val(),
+            nidn_dosen: $("#nidn").val(),
+            kodematkul: $("#nama").val(),
           };
 
           if (
-            data.nidn == null ||
-            data.nidn == "" ||
-            data.nama == null ||
-            data.nama == ""
+            data.nidn_dosen == null ||
+            data.nidn_dosen == "" ||
+            data.kodematkul == null ||
+            data.kodematkul == ""
           ) {
             alert("semua data wajib diisi!");
           } else {
             $.ajax({
-              url: "http://127.0.0.1:8880/api/v1/dosen",
+              url: "http://127.0.0.1:8880/api/v1/ngajar",
               method: "POST",
               data: JSON.stringify(data),
               contentType: "application/json",
               success: function (response) {
                 alert("Tambah Data Dosen Berhasil!");
-                window.location.href = "dosen.html";
+                window.location.href = "datamengajar.html";
               },
               error: function (error) {
                 console.error("Gagal menambah data Dosen!");

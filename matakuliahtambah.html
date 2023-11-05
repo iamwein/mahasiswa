@@ -43,7 +43,7 @@
               <a class="nav-link" href="./matakuliah.html">Mata Kuliah</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="./pembelajaran.html">Data Mengajar</a>
+              <a class="nav-link" href="./datamengajar.html">Data Mengajar</a>
             </li>
           </ul>
           <div class="ml-auto">
@@ -55,13 +55,13 @@
     <div class="container mt-5">
       <div class="row align-items-start">
         <div class="col mb-1">
-          <h5>Tambah Mata Kuliah</h5>
+          <h5>Tambah Data Mata Kuliah</h5>
         </div>
       </div>
       <form id="tambah-matakuliah-form">
         <div class="form-group row">
           <label for="kodematkul" class="col-sm-2 col-form-label">
-            Kode Mata Kuliah
+            Kode Matkul
           </label>
           <div class="col-sm-10">
             <input
@@ -122,16 +122,16 @@
             alert("semua data wajib diisi!");
           } else {
             $.ajax({
-              url: "http://127.0.0.1:8880/api/v1/dosen",
+              url: "http://127.0.0.1:8880/api/v1/matakuliah",
               method: "POST",
               data: JSON.stringify(data),
               contentType: "application/json",
               success: function (response) {
-                alert("Tambah Data Matakuliah Berhasil!");
+                alert("Tambah Data MataKuliah Berhasil!");
                 window.location.href = "matakuliah.html";
               },
               error: function (error) {
-                console.error("Gagal menambah data Matakuliah!");
+                console.error("Gagal menambah data MataKuliah!");
               },
             });
           }
