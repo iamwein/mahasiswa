@@ -1,5 +1,5 @@
 function getDataDosen() {
-    const apiUrl = "http://127.0.0.1:8880/api/v1/dosen";
+    const apiUrl = "http://127.0.0.1:8880/api/v1/matakuliah";
 
     const xhr = new XMLHttpRequest();
     xhr.open("GET", apiUrl, true);
@@ -8,49 +8,49 @@ function getDataDosen() {
         const data = JSON.parse(xhr.responseText);
         tampilDosen(data.data);
       } else {
-        console.error("Gagal mengambil data dosen!");
+        console.error("Gagal mengambil data mata kuliah!");
       }
     };
     xhr.send();
   }
 
 function tampilDosen(data) {
-  const tableBody = document.getElementById("data-dosen");
+  const tableBody = document.getElementById("data-matakuliah");
   tableBody.innerHTML = "";
-  data.forEach(function (dosen) {
+  data.forEach(function (matkul) {
     tableBody.innerHTML +=
       "<tr>" +
       "<td>" +
-      dosen.nidn +
+      matkul.kodematkul +
       "</td>" +
       "<td>" +
-      dosen.nama +
+      matkul.matkul +
       "</td>" +
       "<td>" +
-      dosen.jk +
+      matkul.sks +
       "</td>" +
       "<td>" +
-      dosen.alamat +
+      matkul.smt +
       "</td>" +
       "<td>" +
-      '<button class="btn btn-primary" onclick="editDosen(' +
-      dosen.id +
+      '<button class="btn btn-primary" onclick="editMatkul(' +
+      matkul.id +
       ')">Edit</button> ' +
-      '<button class="btn btn-danger" onclick="deleteDosen(' +
-      dosen.id +
+      '<button class="btn btn-danger" onclick="deleteMatkul(' +
+      matkul.id +
       ')">Delete</button>' +
       "</td>" +
       "</tr>";
   });
 }
 
-function editDosen(dosenId) {
-  window.location.href = "dosenedit.html?id=" + dosenId;
+function editMatkul(kodematkul) {
+  window.location.href = "matakuliahedit.html?kodematkul=" + kodematkul;
 }
 
-function deleteDosen(dosenId) {
-  if (confirm("Hapus Dosen dengan ID: " + dosenId + "?")) {
-    const apiUrl = "http://127.0.0.1:8880/api/v1/dosen/hapus/" + dosenId;
+function deleteMatkul(kodematkul) {
+  if (confirm("Hapus mata kuliah dengan ID: " + kodematkul + "?")) {
+    const apiUrl = "http://127.0.0.1:8880/api/v1/matakuliah/hapus/" + kodematkul;
 
     const xhr = new XMLHttpRequest();
     xhr.open("DELETE", apiUrl, true);
@@ -67,7 +67,7 @@ function deleteDosen(dosenId) {
 }
 
 function tambahDosen() {
-  window.location.href = "dosentambah.html";
+  window.location.href = "matakuliahtambah.html";
 }
 
 window.onload = function () {

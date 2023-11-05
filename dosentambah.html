@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Edit Dosen</title>
+    <title>Tambah Dosen</title>
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -52,19 +52,17 @@
         </div>
       </div>
     </nav>
-    <div class="container mt-4">
-      <h2 class="text-center mb-4">Edit Dosen</h2>
-      <form id="edit-form">
+    <div class="container mt-5">
+      <div class="row align-items-start">
+        <div class="col mb-1">
+          <h5>Tambah Data Dosen</h5>
+        </div>
+      </div>
+      <form id="tambah-dosen-form">
         <div class="form-group row">
           <label for="nidn" class="col-sm-2 col-form-label">NIDN</label>
           <div class="col-sm-10">
-            <input
-              type="text"
-              class="form-control"
-              id="nidn"
-              name="nidn"
-              disabled
-            />
+            <input type="text" class="form-control" id="nidn" name="nidn" />
           </div>
         </div>
         <div class="form-group row">
@@ -85,54 +83,49 @@
             <input type="text" class="form-control" id="alamat" name="alamat" />
           </div>
         </div>
-        <button type="submit" class="btn btn-primary text-center mt-4">
-          Simpan
-        </button>
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary text-center mt-4">
+            Simpan
+          </button>
+        </div>
       </form>
     </div>
+
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-      const urlParams = new URLSearchParams(window.location.search);
-      const id = urlParams.get("id");
-      const editForm = document.getElementById("edit-form");
-      const nidnInput = document.getElementById("nidn");
-      const namaInput = document.getElementById("nama");
-      const jkInput = document.getElementById("jk");
-      const alamatInput = document.getElementById("alamat");
+      $(document).ready(function () {
+        $("#tambah-dosen-form").submit(function (event) {
+          event.preventDefault();
+          const data = {
+            nidn: $("#nidn").val(),
+            nama: $("#nama").val(),
+            jk: $("#jk").val(),
+            alamat: $("#alamat").val(),
+          };
 
-      function getDosenById(id) {
-        const apiUrl = "http://127.0.0.1:8880/api/v1/dosen/id/" + id;
-        $.get(apiUrl, function (res) {
-          nidnInput.value = res.data.nidn;
-          namaInput.value = res.data.nama;
-          jkInput.value = res.data.jk;
-          alamatInput.value = res.data.alamat;
-        });
-      }
-      getDosenById(id);
-
-      editForm.addEventListener("submit", function (e) {
-        e.preventDefault();
-        const editedData = {
-          nama: namaInput.value,
-          jk: jkInput.value,
-          nidn: nidnInput.value,
-          alamat: alamatInput.value,
-        };
-
-        $.ajax({
-          url: "http://127.0.0.1:8880/api/v1/dosen/edit/" + id,
-          method: "PUT",
-          data: JSON.stringify(editedData),
-          contentType: "application/json",
-          success: function (response) {
-            alert("Data berhasil diperbarui!");
-            window.location.href = "dosen.html";
-          },
-          error: function (error) {
-            console.error("Gagal memperbarui data dosen!");
-          },
+          if (
+            data.nidn == null ||
+            data.nidn == "" ||
+            data.nama == null ||
+            data.nama == ""
+          ) {
+            alert("semua data wajib diisi!");
+          } else {
+            $.ajax({
+              url: "http://127.0.0.1:8880/api/v1/dosen",
+              method: "POST",
+              data: JSON.stringify(data),
+              contentType: "application/json",
+              success: function (response) {
+                alert("Tambah Data Dosen Berhasil!");
+                window.location.href = "dosen.html";
+              },
+              error: function (error) {
+                console.error("Gagal menambah data Dosen!");
+              },
+            });
+          }
         });
       });
     </script>

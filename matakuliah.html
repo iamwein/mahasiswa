@@ -8,8 +8,8 @@
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     />
     <link rel="stylesheet" href="./style/style.css" />
-    <script src="./api/getDataList.js"></script>
-    <title>pembelajaran</title>
+    <script src="./api/getMataKuliah.js"></script>
+    <title>Mata Kuliah</title>
   </head>
   <body>
     <nav class="navbar navbar-expand-md navbar-light bg-light">
@@ -45,32 +45,37 @@
               <a class="nav-link" href="./matakuliah.html">Mata Kuliah</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="./pembelajaran.html">Data Mengajar</a>
+              <a class="nav-link" href="./datamengajar.html">Data Mengajar</a>
             </li>
           </ul>
-          <div class="ml-auto" href="./index.html">Logout</div>
+          <div class="ml-auto">
+            <a class="nav-link" href="./login.html">Logout</a>
+          </div>
         </div>
       </div>
     </nav>
-    <div>
-      <h1 class="text-center">Fullstack App Data Dosen</h1>
-      <h4 class="text-center">BNSP SWADHARMA</h4>
-    </div>
     <div class="container mt-5">
-      <div>
-        <h3>Data Pembelajaran</h3>
+      <div class="row align-items-start">
+        <div class="col">
+          <h5>Data Mata Kuliah</h5>
+        </div>
+        <div class="col d-flex justify-content-end">
+          <button class="btn btn-warning" onclick="tambahDosen()">
+            Tambah Mata Kuliah
+          </button>
+        </div>
       </div>
       <table class="table">
         <thead>
           <tr>
-            <th>NIDN</th>
-            <th>Nama Dosen</th>
+            <th>Kode Matkul</th>
             <th>Mata Kuliah</th>
             <th>SKS</th>
+            <th>Semester</th>
             <th>Aksi</th>
           </tr>
         </thead>
-        <tbody id="data-mahasiswa"></tbody>
+        <tbody id="data-matakuliah"></tbody>
       </table>
     </div>
 

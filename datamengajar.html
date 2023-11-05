@@ -8,13 +8,19 @@
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     />
     <link rel="stylesheet" href="./style/style.css" />
-    <title>home</title>
+    <script src="./api/getPembelajaran.js"></script>
+    <title>pembelajaran</title>
   </head>
   <body>
     <nav class="navbar navbar-expand-md navbar-light bg-light">
       <div class="container">
         <a class="navbar-brand" href="#">
-          <img src="./img/logo.png" alt="logo-swd" width="100" height="100" />
+          <img
+            src="./img/logo.png"
+            alt="Company Logo"
+            width="100"
+            height="100"
+          />
         </a>
         <button
           class="navbar-toggler"
@@ -42,19 +48,36 @@
               <a class="nav-link" href="./datamengajar.html">Data Mengajar</a>
             </li>
           </ul>
-          <div class="ml-auto">
-            <a class="nav-link" href="./login.html">Logout</a>
-          </div>
+          <div class="ml-auto" href="./index.html">Logout</div>
         </div>
       </div>
     </nav>
-    <div class="mt-6">
-      <h2 class="text-center">Selamat Datang di ITB Swadharma</h2>
-      <div class="text-center">
-        <img src="./img/logo.png" alt="logo-swd" width="220" height="220" />
+    <div class="container mt-5">
+      <div class="row align-items-start">
+        <div class="col">
+          <h5>Data Pembelajaran</h5>
+        </div>
+        <div class="col d-flex justify-content-end">
+          <button class="btn btn-warning" onclick="tambahNgajar()">
+            Tambah Pembelajaran
+          </button>
+        </div>
       </div>
-      <h6 class="text-center">Sistem Informasi Data Dosen</h6>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>NIDN</th>
+            <th>Nama Dosen</th>
+            <th>ID Mata Kuliah</th>
+            <th>Mata Kuliah</th>
+            <th>SKS</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody id="data-ngajar"></tbody>
+      </table>
     </div>
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
   </body>

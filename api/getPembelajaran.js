@@ -1,70 +1,79 @@
-function getMahasiswaFromAPI() {
-    const apiUrl = "http://127.0.0.1:8080/spring/bnspsert/v1/mahasiswa";
+function getDataNgajar() {
+    const apiUrl = "http://127.0.0.1:8880/api/v1/ngajar";
 
     const xhr = new XMLHttpRequest();
     xhr.open("GET", apiUrl, true);
     xhr.onload = function () {
       if (xhr.status === 200) {
         const data = JSON.parse(xhr.responseText);
-        displayMahasiswa(data);
+        displayNgajar(data.data);
       } else {
-        console.error("Gagal mengambil data mahasiswa dari API.");
+        console.error("Gagal mengambil data pembelajaran dari API.");
       }
     };
     xhr.send();
   }
 
-function displayMahasiswa(data) {
-  const tableBody = document.getElementById("data-mahasiswa");
+function displayNgajar(data) {
+  const tableBody = document.getElementById("data-ngajar");
   tableBody.innerHTML = "";
-  data.forEach(function (dosen) {
+  console.log(data)
+  data.forEach(function (data) {
     tableBody.innerHTML +=
       "<tr>" +
       "<td>" +
-      dosen.nim +
+      data.nidn_dosen +
       "</td>" +
       "<td>" +
-      dosen.nama +
+      data.nama +
       "</td>" +
       "<td>" +
-      dosen.program_studi +
+      data.kodematkul +
       "</td>" +
       "<td>" +
-      dosen.ipk +
+      data.matakuliah +
       "</td>" +
       "<td>" +
-      dosen.tempat_lahir +
+      data.sks +
       "</td>" +
       "<td>" +
-      dosen.tanggal_lahir +
-      "</td>" +
-      "<td>" +
-      '<button class="btn btn-primary" onclick="editDosen(' +
-      dosen.nim +
+      '<button class="btn btn-primary" onclick="editNgajar(' +
+      data.id +
       ')">Edit</button> ' +
-      '<button class="btn btn-danger" onclick="deleteDosen(' +
-      dosen.nim +
+      '<button class="btn btn-danger" onclick="deleteNgajar(' +
+      data.id +
       ')">Delete</button>' +
       "</td>" +
       "</tr>";
   });
 }
 
-function editDosen(mahasiswaId) {
-  window.location.href = "edit.html?nim=" + mahasiswaId;
+function editNgajar(id) {
+  window.location.href = "ngajaredit.html?id=" + id;
 }
 
-function deleteDosen(mahasiswaId) {
-  if (confirm("Hapus Mahasiswa dengan ID: " + mahasiswaId + "?")) {
-    // --
+function deleteNgajar(id) {
+  if (confirm("Hapus Pembelajaran dengan ID: " + id + "?")) {
+    const apiUrl = "http://127.0.0.1:8880/api/v1/ngajar/hapus/" + id;
+
+    const xhr = new XMLHttpRequest();
+    xhr.open("DELETE", apiUrl, true);
+    xhr.onload = function () {
+      if (xhr.status === 200) {
+        alert("Sukses Menghapus Data!")
+        location.reload();
+      } else {
+        console.error("Gagal Menghapus Data!");
+      }
+    };
+    xhr.send();
   }
-  location.reload();
 }
 
-function tambahMahasiswa() {
-  window.location.href = "tambah.html";
+function tambahNgajar() {
+  window.location.href = "ngajartambah.html";
 }
 
 window.onload = function () {
-  getMahasiswaFromAPI();
+  getDataNgajar();
 };

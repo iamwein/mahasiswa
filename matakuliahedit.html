@@ -56,33 +56,37 @@
       <h2 class="text-center mb-4">Edit Dosen</h2>
       <form id="edit-form">
         <div class="form-group row">
-          <label for="nidn" class="col-sm-2 col-form-label">NIDN</label>
+          <label for="kodematkul" class="col-sm-2 col-form-label">
+            Kode Mata Kuliah
+          </label>
           <div class="col-sm-10">
             <input
               type="text"
               class="form-control"
-              id="nidn"
-              name="nidn"
+              id="kodematkul"
+              name="kodematkul"
               disabled
             />
           </div>
         </div>
         <div class="form-group row">
-          <label for="nama" class="col-sm-2 col-form-label">Nama</label>
+          <label for="matkul" class="col-sm-2 col-form-label">
+            Mata Kuliah
+          </label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="nama" name="nama" />
+            <input type="text" class="form-control" id="matkul" name="matkul" />
           </div>
         </div>
         <div class="form-group row">
-          <label for="jk" class="col-sm-2 col-form-label">Jenis Kelamin</label>
+          <label for="sks" class="col-sm-2 col-form-label">SKS</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="jk" name="jk" />
+            <input type="text" class="form-control" id="sks" name="sks" />
           </div>
         </div>
         <div class="form-group row">
-          <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
+          <label for="smt" class="col-sm-2 col-form-label">Semester</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="alamat" name="alamat" />
+            <input type="text" class="form-control" id="smt" name="smt" />
           </div>
         </div>
         <button type="submit" class="btn btn-primary text-center mt-4">
@@ -94,20 +98,20 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
       const urlParams = new URLSearchParams(window.location.search);
-      const id = urlParams.get("id");
+      const id = urlParams.get("kodematkul");
       const editForm = document.getElementById("edit-form");
-      const nidnInput = document.getElementById("nidn");
-      const namaInput = document.getElementById("nama");
-      const jkInput = document.getElementById("jk");
-      const alamatInput = document.getElementById("alamat");
+      const kodematkul = document.getElementById("kodematkul");
+      const matkulInput = document.getElementById("matkul");
+      const sksInput = document.getElementById("sks");
+      const smtInput = document.getElementById("smt");
 
       function getDosenById(id) {
-        const apiUrl = "http://127.0.0.1:8880/api/v1/dosen/id/" + id;
+        const apiUrl = "http://127.0.0.1:8880/api/v1/matakuliah/id/" + id;
         $.get(apiUrl, function (res) {
-          nidnInput.value = res.data.nidn;
-          namaInput.value = res.data.nama;
-          jkInput.value = res.data.jk;
-          alamatInput.value = res.data.alamat;
+          kodematkul.value = res.data.kodematkul;
+          matkulInput.value = res.data.matkul;
+          sksInput.value = res.data.sks;
+          smtInput.value = res.data.smt;
         });
       }
       getDosenById(id);
@@ -115,23 +119,23 @@
       editForm.addEventListener("submit", function (e) {
         e.preventDefault();
         const editedData = {
-          nama: namaInput.value,
-          jk: jkInput.value,
-          nidn: nidnInput.value,
-          alamat: alamatInput.value,
+          kodematkul: kodematkul.value,
+          matkul: matkulInput.value,
+          sks: sksInput.value,
+          smt: smtInput.value,
         };
 
         $.ajax({
-          url: "http://127.0.0.1:8880/api/v1/dosen/edit/" + id,
+          url: "http://127.0.0.1:8880/api/v1/matakuliah/edit/" + id,
           method: "PUT",
           data: JSON.stringify(editedData),
           contentType: "application/json",
           success: function (response) {
             alert("Data berhasil diperbarui!");
-            window.location.href = "dosen.html";
+            window.location.href = "matakuliah.html";
           },
           error: function (error) {
-            console.error("Gagal memperbarui data dosen!");
+            console.error("Gagal memperbarui data!");
           },
         });
       });
